@@ -1,0 +1,46 @@
+#include "mainwindow.h"
+#include "ui_mainwindow.h"
+#include <QPixmap>
+
+MainWindow::MainWindow(QWidget *parent)
+    : QMainWindow(parent)
+    , ui(new Ui::MainWindow)
+{
+    ui->setupUi(this);
+    this->setWindowTitle("BB_bank");
+    QPixmap pixmap = QPixmap(":/new/prefix1/back.jpg");
+    QPalette palette;
+    palette.setBrush(QPalette::Background,QBrush(pixmap));
+    this->setPalette(palette);
+}
+
+MainWindow::~MainWindow()
+{
+    delete ui;
+}
+
+
+void MainWindow::on_pushButton_3_clicked()
+{
+    thank = new class thank(this);
+
+    thank->setModal(false);
+    thank->show();
+}
+
+void MainWindow::on_pushButton_4_clicked()
+{
+    this->close();
+}
+
+void MainWindow::on_pushButton_clicked()
+{
+    loginform = new LoginForm();
+    loginform->show();
+}
+
+void MainWindow::on_pushButton_2_clicked()
+{
+    elogin = new employee_login();
+    elogin->show();
+}

@@ -1,0 +1,44 @@
+#include "account_service.h"
+#include "ui_account_service.h"
+
+account_service::account_service(QWidget *parent,Account *account) :
+    QDialog(parent),
+    ui(new Ui::account_service),
+    account(account)
+{
+    ui->setupUi(this);
+    string str = account->getName();
+    this->setWindowTitle(QString::fromStdString(str));
+
+    this->setFixedSize(600,400);
+
+    QPixmap pixmap = QPixmap(":/new/prefix1/back.jpg");
+    QPalette palette;
+    palette.setBrush(QPalette::Background,QBrush(pixmap));
+    this->setPalette(palette);
+
+    withdraw = new QPushButton(this);
+    withdraw->move(200,60);
+    withdraw->setText("Withdraw");
+    withdraw->setFixedSize(200,30);
+
+    transfer = new QPushButton(this);
+    transfer->move(200,100);
+    transfer->setText("Transfer");
+    transfer->setFixedSize(200,30);
+
+    deposit = new QPushButton(this);
+    deposit->move(200,140);
+    deposit->setText("Deposit");
+    deposit->setFixedSize(200,30);
+
+    check = new QPushButton(this);
+    check->move(200,180);
+    check->setText("Check");
+    check->setFixedSize(200,30);
+}
+
+account_service::~account_service()
+{
+    delete ui;
+}

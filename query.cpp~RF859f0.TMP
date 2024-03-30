@@ -1,0 +1,15 @@
+#include "query.h"
+#include "ui_query.h"
+
+Query::Query(QWidget *parent,Employee *employee) :
+    QDialog(parent),
+    ui(new Ui::Query),
+    employee(employee)
+{
+    ui->setupUi(this);
+}
+
+Query::~Query()
+{
+    delete ui;
+}

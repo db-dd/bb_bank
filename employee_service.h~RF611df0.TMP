@@ -1,0 +1,37 @@
+#ifndef EMPLOYEE_SERVICE_H
+#define EMPLOYEE_SERVICE_H
+
+#include <QDialog>
+#include "employee.h"
+#include <QPushButton>
+#include "create.h"
+#include "eclose.h"
+#include "query.h"
+
+namespace Ui {
+class employee_service;
+}
+
+class employee_service : public QDialog
+{
+    Q_OBJECT
+
+public:
+    explicit employee_service(QWidget *parent = nullptr,Employee *employee = nullptr);
+    ~employee_service();
+    void e_create();
+    void e_close();
+    void e_query();
+
+private:
+    Ui::employee_service *ui;
+    Employee *employee;
+    QPushButton *Create;
+    QPushButton *Close;
+    QPushButton *Query;
+    class Create *create;
+    Eclose *eclose;
+    class Query *query;
+};
+
+#endif // EMPLOYEE_SERVICE_H

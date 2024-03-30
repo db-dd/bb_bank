@@ -1,0 +1,54 @@
+#ifndef EMPLOYEE_H
+#define EMPLOYEE_H
+#include <iostream>
+#include <cstring>
+#include "date.h"
+#include "account.h"
+#include <iomanip>
+
+using namespace std;
+
+class Employee {
+public:
+    Employee(const string &name, const string &id, const string &phoneNumber, const string &employeeId,
+             const string &password);
+
+public:
+    void setName(const string &name);
+
+    void setId(const string &id);
+
+    void setPhoneNumber(const string &phoneNumber);
+
+    void setEmployeeId(const string &employeeId);
+
+    void setPassword(const string &password);
+
+private:
+    string name;//姓名
+    string ID; //身份证
+    string phoneNumber;   //手机号
+    string EmployeeID;   //职工号
+    string password;  //登录密码
+public:
+    bool createAccount(Date date);  //开户
+    bool closeAccount();  //销户
+    void queryAccount();  //查询账户
+
+    const string &getName() const;
+
+    const string &getId() const;
+
+    const string &getPhoneNumber() const;
+
+    const string &getEmployeeId() const;
+
+    const string &getPassword() const;
+
+    static Employee * getEmployee(const string &id, const string &pass);
+};
+CreditAccount * getCreditByID(const string &id);  //查询活期账号是否存在
+SavingAccount *getSavingByID(const string &id);  //查询储蓄账号是否存在
+bool deleteAccount(int choice, const string &id);  //从文件删除账号
+void show(int choice, const string &id); //展示账号信息
+#endif // EMPLOYEE_H

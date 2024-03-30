@@ -1,0 +1,25 @@
+#ifndef QUERY_H
+#define QUERY_H
+
+#include <QDialog>
+#include "employee.h"
+
+namespace Ui {
+class Query;
+}
+
+class Query : public QDialog
+{
+    Q_OBJECT
+
+public:
+    explicit Query(QWidget *parent = nullptr,Employee *emplyee=nullptr);
+    ~Query();
+    void function();
+
+private:
+    Ui::Query *ui;
+    Employee *employee;
+};
+
+#endif // QUERY_H

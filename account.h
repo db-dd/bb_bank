@@ -1,0 +1,117 @@
+#ifndef ACCOUNT_H
+#define ACCOUNT_H
+#include <iostream>
+#include <string>
+#include "date.h"
+#include <fstream>
+#include <iomanip>
+#define MAX_LINE 1024
+#define MAX_USER 100
+
+using namespace std;
+//账号基类
+class Account {
+private:
+    string name;  //姓名
+    string ID; //身份证
+    string phoneNumber;   //手机号
+    string password;  //登录密码
+    double balance;
+    Date lastDeposit;//上一次存款日期
+    Date lastWithdraw;   //上一次取款日期
+public:
+    void setLastDeposit(const Date &lastDeposit);
+
+    void setLastWithdraw(const Date &lastWithdraw);
+
+public:
+    Account(const string &name, const string &id, const string &phoneNumber, const string &password, double balance,
+            const Date &lastDeposit, const Date &lastWithdraw);
+
+    void setName(const string &name);
+
+    void setId(const string &id);
+
+    void setPhoneNumber(const string &phoneNumber);
+
+    void setPassword(const string &password);
+
+    void setBalance(double balance);
+
+    virtual  void deposit(Date date, double amount) = 0; //存钱
+    virtual  void withdraw(Date date, double amount) = 0; //取钱
+    virtual  bool transfer(Date date, double amount,int choice,string id) = 0; //转账
+    virtual  bool changeValue(int choice, string value, Date date) = 0;  //改变账号某个值
+
+    const string &getName() const;
+
+    const string &getId() const;
+
+    const string &getPhoneNumber() const;
+
+    const string &getPassword() const;
+
+    double getBalance() const;   //查询余额
+
+    const Date &getLastDeposit() const;  //查询上一次存款日期
+
+    const Date &getLastWithdraw() const;  //查询上一次取款日期
+
+    static Account * getAccount(int choose, const string &n, const string &I, const string &pass);
+};
+
+
+//活期账户
+class CreditAccount: public Account
+{
+public:
+    void deposit(Date date, double amount) override; //存钱
+    void withdraw(Date date, double amount) override; //取钱
+    bool transfer(Date date, double amount,int choice,string id) override;   //取钱
+    bool changeValue(int choice, string value, Date date) override;  //改变某值
+
+    CreditAccount(const string &name = "", const string &id = "", const string &phoneNumber = "", const string &password = "",
+                  double balance = 0, const Date &lastDeposit = Date(0,0,0), const Date &lastWithdraw = Date(0,0,0));
+    CreditAccount& operator=(const CreditAccount &account);  //重载=
+
+
+
+};
+
+//储蓄账户
+class SavingAccount: public Account
+{
+private:
+    double rate;   //利率
+    double interest;  //利息
+public:
+    double getRate() const;
+
+    void setRate(double rate);
+
+    void setInterest(double interest);
+
+    double getInterest() const;
+
+    SavingAccount& operator=(const SavingAccount &account);  //重载=
+
+    bool changeValue(int choice, string value, Date date) override;  //改变某值
+
+
+public:
+
+    SavingAccount(const string &name = "", const string &id = "", const string &phoneNumber = "", const string &password = "",
+                  double balance = 0, const Date &lastDeposit = Date(0,0,0), const Date &lastWithdraw = Date(0,0,0), double rate = 0, double interest = 0);
+
+    void deposit(Date date, double amount) override; //存钱
+    void withdraw(Date date, double amount) override; //取钱
+    bool transfer(Date date, double amount,int choice=0,string id=0) override; //转账
+    double calculateInterest();    //当本金变化时根据存款时间计算利息
+
+};
+CreditAccount * getCreditByiD(const string &id);  //查询活期账号是否存在
+SavingAccount *getSavingByiD(const string &id);  //查询储蓄账号是否存在
+
+
+
+#endif // ACCOUNT_H

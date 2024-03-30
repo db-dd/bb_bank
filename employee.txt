@@ -1,0 +1,2 @@
+name      ID                  phone         employeeID         password 
+byc	 310                  177           110                123

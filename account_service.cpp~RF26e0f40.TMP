@@ -1,0 +1,17 @@
+#include "account_service.h"
+#include "ui_account_service.h"
+
+account_service::account_service(QWidget *parent,Account *account) :
+    QDialog(parent),
+    ui(new Ui::account_service),
+    account(account)
+{
+    ui->setupUi(this);
+    string str = account->getName();
+    this->setWindowTitle(QString::fromStdString(str));
+}
+
+account_service::~account_service()
+{
+    delete ui;
+}

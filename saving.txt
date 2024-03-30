@@ -1,0 +1,4 @@
+name      ID                  phone         password      balance   lastDeposit   lastWithdraw  rate  interest  
+bb        bb                  17721366125   peter0926     679123    2021 6 15     2021 6 15     0.1   200       
+yy        yy                  12            123           4200      2021 6 15     2021 6 15     0.1   0         
+byc       310229200009264436  17721366125   peter         9800      2021 6 16     2021 6 16     0.3   0         
